@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4459864850019384741}
   - component: {fileID: 4459864850019384740}
   - component: {fileID: 801147245831982474}
+  - component: {fileID: 687776601595252448}
   m_Layer: 0
   m_Name: FirstPersonController
   m_TagString: Player
@@ -216,6 +217,38 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onInventoryFull:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &687776601595252448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4459864850019384750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f3abca1c260eb4bbad6847fbd7545b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  isInvulnerable: 0
+  damageOverlay: {fileID: 0}
+  damageFeedbackDuration: 0.2
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  respawnDelay: 2
+  deathScreen: {fileID: 0}
+  deathText: {fileID: 0}
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerDeath:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &4459864850190357393
