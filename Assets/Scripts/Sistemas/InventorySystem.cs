@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
 /// Sistema de inventario simple para rastrear items recolectados
 /// Este script debe estar en el GameObject del jugador o en un GameManager
-
+/// </summary>
 public class InventorySystem : MonoBehaviour
 {
     [Header("Inventory Settings")]
@@ -35,7 +36,7 @@ public class InventorySystem : MonoBehaviour
 
     private AudioSource audioSource;
 
-    // Singleton
+    // Singleton (opcional pero útil)
     public static InventorySystem Instance { get; private set; }
 
     void Awake()
@@ -63,7 +64,9 @@ public class InventorySystem : MonoBehaviour
         UpdateUI();
     }
 
+    /// <summary>
     /// Añade un item al inventario
+    /// </summary>
     public bool AddItem(CollectableItem item)
     {
         // Verificar capacidad
@@ -105,7 +108,9 @@ public class InventorySystem : MonoBehaviour
         return true;
     }
 
+    /// <summary>
     /// Remueve items del inventario
+    /// </summary>
     public bool RemoveItem(string itemType, int amount = 1)
     {
         if (!itemCounts.ContainsKey(itemType) || itemCounts[itemType] < amount)
@@ -124,25 +129,33 @@ public class InventorySystem : MonoBehaviour
         return true;
     }
 
+    /// <summary>
     /// Obtiene la cantidad de un tipo específico de item
+    /// </summary>
     public int GetItemCount(string itemType)
     {
         return itemCounts.ContainsKey(itemType) ? itemCounts[itemType] : 0;
     }
 
+    /// <summary>
     /// Obtiene el conteo total de todos los items
+    /// </summary>
     public int GetTotalItemCount()
     {
         return collectedItems.Count;
     }
 
+    /// <summary>
     /// Verifica si tiene suficientes items de un tipo
+    /// </summary>
     public bool HasItem(string itemType, int requiredAmount = 1)
     {
         return GetItemCount(itemType) >= requiredAmount;
     }
 
+    /// <summary>
     /// Limpia el inventario
+    /// </summary>
     public void ClearInventory()
     {
         itemCounts.Clear();
@@ -151,13 +164,17 @@ public class InventorySystem : MonoBehaviour
         Debug.Log("Inventario limpiado");
     }
 
+    /// <summary>
     /// Devuelve un diccionario con todos los items y sus cantidades
+    /// </summary>
     public Dictionary<string, int> GetAllItems()
     {
         return new Dictionary<string, int>(itemCounts);
     }
 
+    /// <summary>
     /// Actualiza el texto UI del inventario
+    /// </summary>
     void UpdateUI()
     {
         if (itemCountText != null)
@@ -173,7 +190,9 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
+    /// <summary>
     /// Debug: Muestra el contenido del inventario en consola
+    /// </summary>
     public void PrintInventory()
     {
         Debug.Log("=== INVENTARIO ===");
