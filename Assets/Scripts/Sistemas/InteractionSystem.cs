@@ -49,7 +49,6 @@ public class InteractionSystem : MonoBehaviour
     }
 
     /// Detecta objetos interactuables frente al jugador
-
     void CheckForInteractable()
     {
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
@@ -101,8 +100,9 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 
-
+ 
     /// Muestra el texto de interacción en pantalla
+
     void ShowInteractionPrompt(string prompt)
     {
         if (interactionText != null)
@@ -112,7 +112,9 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 
+
     /// Oculta el texto de interacción
+
     void HideInteractionPrompt()
     {
         if (interactionText != null)
