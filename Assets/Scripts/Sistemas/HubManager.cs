@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Gestor del Hub donde el jugador recibe listas y elige mejoras
+/// Versión simplificada que crea la UI dinámicamente
 /// </summary>
 public class HubManager : MonoBehaviour
 {
@@ -14,7 +15,6 @@ public class HubManager : MonoBehaviour
         public string upgradeName;
         [TextArea(2, 4)]
         public string description;
-        public Sprite icon;
     }
 
     [Header("Level Quests")]
@@ -34,24 +34,38 @@ public class HubManager : MonoBehaviour
     public Text questListText;
     public Button startLevelButton;
 
-    public GameObject upgradeSelectionPanel;
-    public Text upgradePromptText;
-    public GameObject upgradeButtonPrefab;
-    public Transform upgradeButtonContainer;
-
     public Text currentLevelText;
     public Text upgradesText;
+
+    [Header("Canvas Reference")]
+    [Tooltip("Canvas principal del Hub")]
+    public Canvas mainCanvas;
 
     [Header("Final Door")]
     public GameObject finalDoor;
     public Text finalDoorText;
 
-    // Estado
+    // Referencias internas para el panel de mejoras (creado dinámicamente)
+    private GameObject upgradePanel;
     private bool waitingForUpgradeSelection = false;
 
     void Start()
     {
+        // Desbloquear cursor en el Hub
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         InitializeHub();
+    }
+
+    void Update()
+    {
+        // ESC para desbloquear cursor (seguridad)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     void InitializeHub()
@@ -68,11 +82,15 @@ public class HubManager : MonoBehaviour
         if (questDisplayPanel != null)
             questDisplayPanel.SetActive(false);
 
-        if (upgradeSelectionPanel != null)
-            upgradeSelectionPanel.SetActive(false);
-
         if (finalDoor != null)
             finalDoor.SetActive(false);
+
+        // Destruir panel de mejoras si existe
+        if (upgradePanel != null)
+        {
+            Destroy(upgradePanel);
+            upgradePanel = null;
+        }
 
         // Actualizar info general
         UpdateGeneralInfo();
@@ -134,36 +152,154 @@ public class HubManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Muestra la selección de mejoras
+    /// Muestra la selección de mejoras (crea UI dinámicamente)
     /// </summary>
     void ShowUpgradeSelection(int completedLevel)
     {
+        Debug.Log($"Mostrando selección de mejoras para nivel {completedLevel}");
         waitingForUpgradeSelection = true;
 
-        if (upgradeSelectionPanel != null)
+        // Verificar que tenemos un Canvas
+        if (mainCanvas == null)
         {
-            upgradeSelectionPanel.SetActive(true);
-
-            if (upgradePromptText != null)
+            mainCanvas = FindObjectOfType<Canvas>();
+            if (mainCanvas == null)
             {
-                upgradePromptText.text = $"¡Nivel {completedLevel - 1} completado!\nElige una mejora:";
-            }
-
-            // Limpiar botones anteriores
-            foreach (Transform child in upgradeButtonContainer)
-            {
-                Destroy(child.gameObject);
-            }
-
-            // Obtener las mejoras correspondientes
-            List<Upgrade> availableUpgrades = GetUpgradesForLevel(completedLevel - 1);
-
-            // Crear botones de mejoras
-            foreach (var upgrade in availableUpgrades)
-            {
-                CreateUpgradeButton(upgrade);
+                Debug.LogError("No se encontró Canvas en la escena!");
+                return;
             }
         }
+
+        // Obtener las mejoras disponibles
+        List<Upgrade> availableUpgrades = GetUpgradesForLevel(completedLevel - 1);
+
+        if (availableUpgrades.Count == 0)
+        {
+            Debug.LogWarning($"No hay mejoras configuradas para el nivel {completedLevel - 1}");
+            // Continuar sin mejora
+            ContinueWithoutUpgrade();
+            return;
+        }
+
+        // Crear panel de mejoras desde cero
+        CreateUpgradePanel(availableUpgrades, completedLevel);
+    }
+
+    /// <summary>
+    /// Crea el panel de mejoras dinámicamente
+    /// </summary>
+    void CreateUpgradePanel(List<Upgrade> upgrades, int completedLevel)
+    {
+        // Panel principal (fondo oscuro)
+        upgradePanel = new GameObject("UpgradeSelectionPanel");
+        upgradePanel.transform.SetParent(mainCanvas.transform, false);
+
+        RectTransform panelRect = upgradePanel.AddComponent<RectTransform>();
+        panelRect.anchorMin = Vector2.zero;
+        panelRect.anchorMax = Vector2.one;
+        panelRect.offsetMin = Vector2.zero;
+        panelRect.offsetMax = Vector2.zero;
+
+        Image panelImage = upgradePanel.AddComponent<Image>();
+        panelImage.color = new Color(0, 0, 0, 0.85f); // Fondo negro semi-transparente
+
+        // Título
+        GameObject titleObj = new GameObject("Title");
+        titleObj.transform.SetParent(upgradePanel.transform, false);
+
+        RectTransform titleRect = titleObj.AddComponent<RectTransform>();
+        titleRect.anchorMin = new Vector2(0.5f, 1f);
+        titleRect.anchorMax = new Vector2(0.5f, 1f);
+        titleRect.pivot = new Vector2(0.5f, 1f);
+        titleRect.anchoredPosition = new Vector2(0, -50);
+        titleRect.sizeDelta = new Vector2(600, 60);
+
+        Text titleText = titleObj.AddComponent<Text>();
+        titleText.text = $"¡Nivel {completedLevel - 1} Completado!";
+        titleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        titleText.fontSize = 36;
+        titleText.alignment = TextAnchor.MiddleCenter;
+        titleText.color = Color.yellow;
+
+        // Subtítulo
+        GameObject subtitleObj = new GameObject("Subtitle");
+        subtitleObj.transform.SetParent(upgradePanel.transform, false);
+
+        RectTransform subtitleRect = subtitleObj.AddComponent<RectTransform>();
+        subtitleRect.anchorMin = new Vector2(0.5f, 1f);
+        subtitleRect.anchorMax = new Vector2(0.5f, 1f);
+        subtitleRect.pivot = new Vector2(0.5f, 1f);
+        subtitleRect.anchoredPosition = new Vector2(0, -120);
+        subtitleRect.sizeDelta = new Vector2(500, 40);
+
+        Text subtitleText = subtitleObj.AddComponent<Text>();
+        subtitleText.text = "Elige una mejora:";
+        subtitleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        subtitleText.fontSize = 24;
+        subtitleText.alignment = TextAnchor.MiddleCenter;
+        subtitleText.color = Color.white;
+
+        // Crear botones de mejoras
+        float startY = -200;
+        float buttonHeight = 100;
+        float buttonSpacing = 20;
+
+        for (int i = 0; i < upgrades.Count; i++)
+        {
+            CreateUpgradeButton(upgrades[i], upgradePanel.transform, startY - (i * (buttonHeight + buttonSpacing)));
+        }
+
+        Debug.Log($"Panel de mejoras creado con {upgrades.Count} opciones");
+    }
+
+    /// <summary>
+    /// Crea un botón de mejora individual
+    /// </summary>
+    void CreateUpgradeButton(Upgrade upgrade, Transform parent, float posY)
+    {
+        // Botón
+        GameObject buttonObj = new GameObject($"Button_{upgrade.upgradeName}");
+        buttonObj.transform.SetParent(parent, false);
+
+        RectTransform buttonRect = buttonObj.AddComponent<RectTransform>();
+        buttonRect.anchorMin = new Vector2(0.5f, 0.5f);
+        buttonRect.anchorMax = new Vector2(0.5f, 0.5f);
+        buttonRect.pivot = new Vector2(0.5f, 0.5f);
+        buttonRect.anchoredPosition = new Vector2(0, posY);
+        buttonRect.sizeDelta = new Vector2(500, 90);
+
+        Image buttonImage = buttonObj.AddComponent<Image>();
+        buttonImage.color = new Color(0.2f, 0.2f, 0.2f, 1f);
+
+        Button button = buttonObj.AddComponent<Button>();
+        
+        // Configurar colores del botón
+        ColorBlock colors = button.colors;
+        colors.normalColor = new Color(0.3f, 0.3f, 0.3f, 1f);
+        colors.highlightedColor = new Color(0.5f, 0.5f, 0.2f, 1f);
+        colors.pressedColor = new Color(0.7f, 0.7f, 0.3f, 1f);
+        button.colors = colors;
+
+        button.onClick.AddListener(() => SelectUpgrade(upgrade));
+
+        // Texto del botón
+        GameObject textObj = new GameObject("Text");
+        textObj.transform.SetParent(buttonObj.transform, false);
+
+        RectTransform textRect = textObj.AddComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.offsetMin = new Vector2(15, 10);
+        textRect.offsetMax = new Vector2(-15, -10);
+
+        Text buttonText = textObj.AddComponent<Text>();
+        buttonText.text = $"<b>{upgrade.upgradeName}</b>\n<size=14>{upgrade.description}</size>";
+        buttonText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        buttonText.fontSize = 18;
+        buttonText.alignment = TextAnchor.MiddleCenter;
+        buttonText.color = Color.white;
+
+        Debug.Log($"Botón creado: {upgrade.upgradeName}");
     }
 
     /// <summary>
@@ -183,38 +319,6 @@ public class HubManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Crea un botón de mejora
-    /// </summary>
-    void CreateUpgradeButton(Upgrade upgrade)
-    {
-        if (upgradeButtonPrefab == null || upgradeButtonContainer == null)
-            return;
-
-        GameObject buttonObj = Instantiate(upgradeButtonPrefab, upgradeButtonContainer);
-        Button button = buttonObj.GetComponent<Button>();
-
-        // Configurar texto
-        Text buttonText = buttonObj.GetComponentInChildren<Text>();
-        if (buttonText != null)
-        {
-            buttonText.text = $"{upgrade.upgradeName}\n<size=10>{upgrade.description}</size>";
-        }
-
-        // Configurar imagen (opcional)
-        Image buttonImage = buttonObj.GetComponent<Image>();
-        if (buttonImage != null && upgrade.icon != null)
-        {
-            buttonImage.sprite = upgrade.icon;
-        }
-
-        // Configurar acción del botón
-        if (button != null)
-        {
-            button.onClick.AddListener(() => SelectUpgrade(upgrade));
-        }
-    }
-
-    /// <summary>
     /// Selecciona una mejora
     /// </summary>
     void SelectUpgrade(Upgrade upgrade)
@@ -229,9 +333,12 @@ public class HubManager : MonoBehaviour
 
         waitingForUpgradeSelection = false;
 
-        // Ocultar panel de mejoras
-        if (upgradeSelectionPanel != null)
-            upgradeSelectionPanel.SetActive(false);
+        // Destruir panel de mejoras
+        if (upgradePanel != null)
+        {
+            Destroy(upgradePanel);
+            upgradePanel = null;
+        }
 
         // Mostrar la quest del siguiente nivel
         int nextLevel = GameManager.Instance.currentLevel;
@@ -245,6 +352,24 @@ public class HubManager : MonoBehaviour
         }
 
         UpdateGeneralInfo();
+    }
+
+    /// <summary>
+    /// Continúa sin elegir mejora (si no hay disponibles)
+    /// </summary>
+    void ContinueWithoutUpgrade()
+    {
+        waitingForUpgradeSelection = false;
+
+        int nextLevel = GameManager.Instance.currentLevel;
+        if (nextLevel <= levelQuests.Count)
+        {
+            ShowQuestForLevel(nextLevel);
+        }
+        else
+        {
+            ShowFinalDoor();
+        }
     }
 
     /// <summary>
@@ -281,9 +406,6 @@ public class HubManager : MonoBehaviour
         // Ocultar otros paneles
         if (questDisplayPanel != null)
             questDisplayPanel.SetActive(false);
-
-        if (upgradeSelectionPanel != null)
-            upgradeSelectionPanel.SetActive(false);
     }
 
     /// <summary>
@@ -325,6 +447,19 @@ public class HubManager : MonoBehaviour
             GameManager.Instance.currentLevel++;
             InitializeHub();
         }
+    }
+
+    /// <summary>
+    /// Debug: Mostrar panel de mejoras
+    /// </summary>
+    [ContextMenu("Test Show Upgrades (Debug)")]
+    void TestShowUpgrades()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.currentLevel = 1;
+        }
+        ShowUpgradeSelection(1);
     }
 }
 
