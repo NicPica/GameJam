@@ -811,6 +811,107 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1001 &593824515
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6623294763368249165, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_Name
+      value: TransitionScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868040258820049338, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: defaultDisplayTime
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
 --- !u!1 &708979346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,8 +1917,12 @@ MonoBehaviour:
   - Level1
   - Level2
   - Level3
+  levelLoreData:
+  - {fileID: 11400000, guid: f173659bec7198e4d93f64665e03411f, type: 2}
+  - {fileID: 11400000, guid: 57efa74c6211c834fb235bd44083b704, type: 2}
+  - {fileID: 11400000, guid: 10b6186f50c8c98449bc611c2dd68317, type: 2}
+  hubLoreData: {fileID: 0}
   currentLevel: 0
-  unlockedUpgrades: []
   debugMode: 1
 --- !u!4 &2053038701
 Transform:
@@ -1909,27 +2014,11 @@ MonoBehaviour:
       amount: 2
     - itemName: Tesoro Legendario
       amount: 1
-  upgradesLevel1:
-  - upgradeName: Linterna Mejorada
-    description: "Tu linterna ilumina m\xE1s lejos"
-  - upgradeName: Botas de Velocidad
-    description: "Corres un 20% m\xE1s r\xE1pido"
-  - upgradeName: Detector de Items
-    description: "Los items brillan m\xE1s intensamente"
-  upgradesLevel2:
-  - upgradeName: Linterna Mejorada
-    description: "Tu linterna ilumina m\xE1s lejos"
-  - upgradeName: Radar de Peligros
-    description: Las trampas emiten un sonido de alerta
-  - upgradeName: Mochila Grande
-    description: "Puedes recolectar items m\xE1s r\xE1pido"
   questDisplayPanel: {fileID: 478679551}
   questTitleText: {fileID: 1100703429}
   questListText: {fileID: 733781863}
   startLevelButton: {fileID: 849214071}
   currentLevelText: {fileID: 502426184}
-  upgradesText: {fileID: 0}
-  mainCanvas: {fileID: 124015366}
   finalDoor: {fileID: 1800809616}
   finalDoorText: {fileID: 0}
 --- !u!1 &2136724850
@@ -1988,3 +2077,4 @@ SceneRoots:
   - {fileID: 376470489}
   - {fileID: 1517748071}
   - {fileID: 2136724851}
+  - {fileID: 593824515}
