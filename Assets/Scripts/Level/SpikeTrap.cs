@@ -188,16 +188,7 @@ public class SpikeTrap : MonoBehaviour
         }
         else
         {
-            // Verificar armadura
-            float finalDamage = damage;
-            ArmorUpgrade armor = playerHealth.GetComponent<ArmorUpgrade>();
-            if (armor != null)
-            {
-                finalDamage *= (1f - armor.damageReduction);
-                Debug.Log($"Armadura redujo daño de {damage} a {finalDamage}");
-            }
-
-            playerHealth.TakeDamage(finalDamage);
+            playerHealth.TakeDamage(damage);
         }
 
         // Efectos

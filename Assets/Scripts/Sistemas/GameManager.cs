@@ -20,9 +20,6 @@ public class GameManager : MonoBehaviour
     [Tooltip("Nivel actual (0 = Hub, 1-3 = Niveles)")]
     public int currentLevel = 0;
 
-    [Tooltip("Mejoras desbloqueadas por el jugador")]
-    public List<string> unlockedUpgrades = new List<string>();
-
     [Header("Debug")]
     [Tooltip("¿Mostrar información de debug en consola?")]
     public bool debugMode = true;
@@ -120,9 +117,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // Avanzar al siguiente nivel
+            // Avanzar al siguiente nivel directamente
             currentLevel++;
-            LoadHub();
+            LoadCurrentLevel();
         }
     }
 
@@ -143,38 +140,6 @@ public class GameManager : MonoBehaviour
         // Esperar 2 segundos antes de reiniciar
         yield return new WaitForSeconds(2f);
         RestartCurrentLevel();
-    }
-
-    #endregion
-
-    #region Upgrades
-
-    /// <summary>
-    /// Añade una mejora al jugador
-    /// </summary>
-    public void AddUpgrade(string upgradeName)
-    {
-        if (!unlockedUpgrades.Contains(upgradeName))
-        {
-            unlockedUpgrades.Add(upgradeName);
-            DebugLog($"Mejora desbloqueada: {upgradeName}");
-        }
-    }
-
-    /// <summary>
-    /// Verifica si el jugador tiene una mejora específica
-    /// </summary>
-    public bool HasUpgrade(string upgradeName)
-    {
-        return unlockedUpgrades.Contains(upgradeName);
-    }
-
-    /// <summary>
-    /// Obtiene todas las mejoras desbloqueadas
-    /// </summary>
-    public List<string> GetAllUpgrades()
-    {
-        return new List<string>(unlockedUpgrades);
     }
 
     #endregion
@@ -205,7 +170,6 @@ public class GameManager : MonoBehaviour
     {
         DebugLog("Reiniciando juego completo...");
         currentLevel = 0;
-        unlockedUpgrades.Clear();
         playerDiedInLevel = false;
         levelCompleted = false;
         LoadHub();
@@ -228,7 +192,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public string GetGameState()
     {
-        return $"Nivel: {currentLevel}/{levelSceneNames.Length} | Mejoras: {unlockedUpgrades.Count}";
+        return $"Nivel: {currentLevel}/{levelSceneNames.Length}";
     }
 
     #endregion
