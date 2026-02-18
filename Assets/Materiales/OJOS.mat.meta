@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materiales/OJOS.mat.meta
 guid: 6882020447d268d42ad725825266fc91
 NativeFormatImporter:
+========
+guid: 99c9720ab356a0642a771bea13969a05
+DefaultImporter:
+>>>>>>>> main:Assets/Scenes/Level1TEST.unity.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
