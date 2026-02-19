@@ -87,14 +87,7 @@ public class CollectableItem : MonoBehaviour, IInteractable
             Debug.LogWarning($"CollectableItem {itemName} no tiene Collider!");
         }
 
-        //// Configurar audio
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null && pickupSound != null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.playOnAwake = false;
-            audioSource.spatialBlend = 1f; // 3D sound
-        }
+       
     }
 
     void Update()
@@ -168,10 +161,15 @@ public class CollectableItem : MonoBehaviour, IInteractable
     /// Llamado cuando el item es exitosamente recolectado
     protected virtual void OnItemCollected()
     {
-        // Reproducir sonido
-        if (pickupSound != null && audioSource != null)
+        // Reproducir sonido a través del AudioManager
+        if (pickupSound != null && AudioManager.Instance != null)
         {
-            audioSource.PlayOneShot(pickupSound);
+            AudioManager.Instance.PlaySFX(pickupSound);
+        }
+        else if (pickupSound != null)
+        {
+            // Fallback si no hay AudioManager
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
         }
 
         // Spawear partículas

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: NIVEL2TITULO
   loreText: BLABLABLABLABLA
-  displayDuration: 5
+  displayDuration: 3
   fadeSpeed: 1.5
   textColor: {r: 1, g: 1, b: 1, a: 1}
   titleFontSize: 40
