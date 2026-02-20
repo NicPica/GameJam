@@ -16268,6 +16268,7 @@ MonoBehaviour:
   - itemName: Tesoro Legendario
     requiredAmount: 1
     currentAmount: 0
+  itemDataList: []
   allowPartialCompletion: 0
   onQuestStarted:
     m_PersistentCalls:
@@ -16281,6 +16282,7 @@ MonoBehaviour:
   onQuestFailed:
     m_PersistentCalls:
       m_Calls: []
+  questUIManager: {fileID: 0}
   questStatusText: {fileID: 0}
 --- !u!4 &896512551
 Transform:
