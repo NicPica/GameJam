@@ -569,10 +569,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 4445931337853807751}
-  fov: 60
+  fov: 50
   invertCamera: 0
   cameraCanMove: 1
-  mouseSensitivity: 2
+  mouseSensitivity: 1
   maxLookAngle: 50
   lockCursor: 1
   crosshair: 1
@@ -587,12 +587,12 @@ MonoBehaviour:
   walkSpeed: 5
   maxVelocityChange: 10
   enableSprint: 1
-  unlimitedSprint: 1
+  unlimitedSprint: 0
   sprintKey: 304
   sprintSpeed: 7
-  sprintDuration: 5
+  sprintDuration: 4
   sprintCooldown: 0.5
-  sprintFOV: 80
+  sprintFOV: 70
   sprintFOVStepTime: 10
   useSprintBar: 1
   hideBarWhenFull: 1
@@ -602,7 +602,7 @@ MonoBehaviour:
   sprintBarHeightPercent: 0.02
   enableJump: 1
   jumpKey: 32
-  jumpPower: 5
+  jumpPower: 3
   enableCrouch: 1
   holdToCrouch: 1
   crouchKey: 306
@@ -612,6 +612,11 @@ MonoBehaviour:
   joint: {fileID: 226831435247147098}
   bobSpeed: 10
   bobAmount: {x: 0, y: 0.1, z: 0}
+  enableFootsteps: 1
+  footstepSounds:
+  - {fileID: 8300000, guid: 4c606e907800b9741981bb704cbdaeab, type: 3}
+  footstepInterval: 0.5
+  sprintFootstepInterval: 0.4
 --- !u!114 &4164544646536494265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +843,6 @@ GameObject:
   - component: {fileID: 3408147768424804123}
   - component: {fileID: 3666387366134539437}
   - component: {fileID: 1841229570697838679}
-  - component: {fileID: 3549769811505681119}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: MainCamera
@@ -983,24 +987,3 @@ MonoBehaviour:
     m_Bits: 8
   interactKey: 101
   interactionText: {fileID: 7569503109171618982}
---- !u!114 &3549769811505681119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9060502938320387696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b96dffb3c936454ba14cbfb55458727, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashlight: {fileID: 0}
-  flashlightKey: 102
-  startOn: 0
-  intensity: 2
-  range: 15
-  spotAngle: 60
-  animateToggle: 1
-  toggleDuration: 0.1
-  toggleSound: {fileID: 0}

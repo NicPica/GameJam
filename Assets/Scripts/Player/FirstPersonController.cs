@@ -1,4 +1,4 @@
-﻿// CHANGE LOG
+// CHANGE LOG
 // 
 // CHANGES || version VERSION
 //
@@ -131,6 +131,20 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    #region Footsteps
+
+    [Header("Footsteps")]
+    public bool enableFootsteps = true;
+    public AudioClip[] footstepSounds; // Array de sonidos para variar
+    public float footstepInterval = 0.5f; // Tiempo entre pasos
+    public float sprintFootstepInterval = 0.3f; // Más rápido al correr
+
+    // Internal Variables
+    private AudioSource footstepAudioSource;
+    private float footstepTimer = 0f;
+
+    #endregion
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -146,6 +160,15 @@ public class FirstPersonController : MonoBehaviour
         {
             sprintRemaining = sprintDuration;
             sprintCooldownReset = sprintCooldown;
+        }
+
+        // Setup footstep audio
+        if (enableFootsteps)
+        {
+            footstepAudioSource = gameObject.AddComponent<AudioSource>();
+            footstepAudioSource.playOnAwake = false;
+            footstepAudioSource.spatialBlend = 0f; // 2D sound
+            footstepAudioSource.volume = 0.5f;
         }
     }
 
@@ -362,6 +385,11 @@ public class FirstPersonController : MonoBehaviour
         {
             HeadBob();
         }
+
+        if(enableFootsteps)
+        {
+            PlayFootsteps();
+        }
     }
 
     void FixedUpdate()
@@ -526,15 +554,54 @@ public class FirstPersonController : MonoBehaviour
             joint.localPosition = new Vector3(Mathf.Lerp(joint.localPosition.x, jointOriginalPos.x, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.y, jointOriginalPos.y, Time.deltaTime * bobSpeed), Mathf.Lerp(joint.localPosition.z, jointOriginalPos.z, Time.deltaTime * bobSpeed));
         }
     }
+
+    private void PlayFootsteps()
+    {
+        // 1. Si no estamos en el suelo o no nos movemos, reseteamos
+        if (!enableFootsteps || !isGrounded || rb.linearVelocity.magnitude < 0.1f)
+        {
+            footstepTimer = 0f;
+            return;
+        }
+
+        // 2. Elegir el intervalo (Caminar o Correr)
+        float currentInterval = isSprinting ? sprintFootstepInterval : footstepInterval;
+
+        // 3. LA CLAVE: Usar Time.deltaTime para que sea independiente de los FPS
+        footstepTimer += Time.deltaTime;
+
+        if (footstepTimer >= currentInterval)
+        {
+            footstepTimer = 0f;
+
+            if (footstepSounds != null && footstepSounds.Length > 0)
+            {
+                AudioClip clip = footstepSounds[Random.Range(0, footstepSounds.Length)];
+
+                if (AudioManager.Instance != null)
+                {
+                    // Usamos el nuevo método con variación
+                    // 0.85f y 1.15f es un rango excelente para pasos
+                    AudioManager.Instance.PlaySFX(clip, 0.4f, 0.85f, 1.15f);
+                }
+                else if (footstepAudioSource != null)
+                {
+                    // Si no hay AudioManager, lo hacemos localmente
+                    footstepAudioSource.pitch = Random.Range(0.85f, 1.15f);
+                    footstepAudioSource.PlayOneShot(clip, 0.4f);
+                }
+            }
+        }
+    }
 }
 
 
 
-// Custom Editor
 #if UNITY_EDITOR
-    [CustomEditor(typeof(FirstPersonController)), InitializeOnLoadAttribute]
-    public class FirstPersonControllerEditor : Editor
-    {
+
+[CustomEditor(typeof(FirstPersonController)), InitializeOnLoadAttribute]
+public class FirstPersonController_Editor : Editor
+{
     FirstPersonController fpc;
     SerializedObject SerFPC;
 
@@ -549,19 +616,13 @@ public class FirstPersonController : MonoBehaviour
         SerFPC.Update();
 
         EditorGUILayout.Space();
-        GUILayout.Label("Modular First Person Controller", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 16 });
-        GUILayout.Label("By Jess Case", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
-        GUILayout.Label("version 1.0.1", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Normal, fontSize = 12 });
+        GUILayout.Label("Modular First Person Controller", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 16 }, GUILayout.ExpandWidth(true));
         EditorGUILayout.Space();
-
-        #region Camera Setup
-
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         GUILayout.Label("Camera Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
         EditorGUILayout.Space();
 
         fpc.playerCamera = (Camera)EditorGUILayout.ObjectField(new GUIContent("Camera", "Camera attached to the controller."), fpc.playerCamera, typeof(Camera), true);
-        fpc.fov = EditorGUILayout.Slider(new GUIContent("Field of View", "The camera’s view angle. Changes the player camera directly."), fpc.fov, fpc.zoomFOV, 179f);
+        fpc.fov = EditorGUILayout.Slider(new GUIContent("Field of View", "The camera's view angle. Changes the player camera directly."), fpc.fov, fpc.zoomFOV, 179f);
         fpc.cameraCanMove = EditorGUILayout.ToggleLeft(new GUIContent("Enable Camera Rotation", "Determines if the camera is allowed to move."), fpc.cameraCanMove);
 
         GUI.enabled = fpc.cameraCanMove;
@@ -603,8 +664,6 @@ public class FirstPersonController : MonoBehaviour
         fpc.zoomFOV = EditorGUILayout.Slider(new GUIContent("Zoom FOV", "Determines the field of view the camera zooms to."), fpc.zoomFOV, .1f, fpc.fov);
         fpc.zoomStepTime = EditorGUILayout.Slider(new GUIContent("Step Time", "Determines how fast the FOV transitions while zooming in."), fpc.zoomStepTime, .1f, 10f);
         GUI.enabled = true;
-
-        #endregion
 
         #endregion
 
@@ -728,15 +787,35 @@ public class FirstPersonController : MonoBehaviour
 
         #endregion
 
+        #region Footsteps Setup
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        GUILayout.Label("Footsteps Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+        EditorGUILayout.Space();
+
+        fpc.enableFootsteps = EditorGUILayout.ToggleLeft(new GUIContent("Enable Footsteps", "Determines if footstep sounds will play while moving."), fpc.enableFootsteps);
+
+        if (fpc.enableFootsteps)
+        {
+            EditorGUI.indentLevel++;
+            SerializedProperty footstepSoundsProp = SerFPC.FindProperty("footstepSounds");
+            EditorGUILayout.PropertyField(footstepSoundsProp, new GUIContent("Footstep Audio Clips"), true);
+            fpc.footstepInterval = EditorGUILayout.Slider(new GUIContent("Walk Interval", "Time between steps while walking."), fpc.footstepInterval, 0.1f, 1f);
+            fpc.sprintFootstepInterval = EditorGUILayout.Slider(new GUIContent("Sprint Interval", "Time between steps while sprinting."), fpc.sprintFootstepInterval, 0.1f, 1f);
+            EditorGUI.indentLevel--;
+        }
+
+        #endregion
+
         //Sets any changes from the prefab
-        if(GUI.changed)
+        if (GUI.changed)
         {
             EditorUtility.SetDirty(fpc);
             Undo.RecordObject(fpc, "FPC Change");
             SerFPC.ApplyModifiedProperties();
         }
     }
-
 }
 
 #endif
