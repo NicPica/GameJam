@@ -130,8 +130,8 @@ MonoBehaviour:
   destroyOnPickup: 1
   enableHoverEffect: 1
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  rotationSpeed: 0
-  enableFloating: 0
+  rotationSpeed: 20
+  enableFloating: 1
   floatAmplitude: 0.2
   floatSpeed: 2
   pickupSound: {fileID: 8300000, guid: aef4d1ab9670733438697c72e64202db, type: 3}
