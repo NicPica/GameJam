@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 /// <summary>
 /// Gestor de misiones/listas de recolección
-/// Rastrea qué items necesita el jugador recoger para completar el nivel
+/// Versión actualizada con UI visual (sprites + contadores)
 /// </summary>
 public class QuestManager : MonoBehaviour
 {
@@ -31,6 +31,9 @@ public class QuestManager : MonoBehaviour
     [Header("Quest Configuration")]
     [Tooltip("Lista de items necesarios para completar el nivel")]
     public List<QuestItem> questItems = new List<QuestItem>();
+    
+    [Tooltip("Referencias a los ItemData (para obtener sprites)")]
+    public List<ItemData> itemDataList = new List<ItemData>();
 
     [Tooltip("¿Se puede completar el nivel sin todos los items?")]
     public bool allowPartialCompletion = false;
@@ -41,7 +44,11 @@ public class QuestManager : MonoBehaviour
     public UnityEvent onQuestCompleted;
     public UnityEvent onQuestFailed;
 
-    [Header("UI References (Opcional)")]
+    [Header("UI References")]
+    [Tooltip("QuestUIManager para mostrar sprites + contadores")]
+    public QuestUIManager questUIManager;
+    
+    [Tooltip("(Opcional) Texto de status adicional")]
     public UnityEngine.UI.Text questStatusText;
 
     // Estado
@@ -69,7 +76,6 @@ public class QuestManager : MonoBehaviour
     void OnEnable()
     {
         // Suscribirse al evento de inventario
-        // Esperar un frame para asegurarse de que el Player se haya cargado
         StartCoroutine(SubscribeToInventoryDelayed());
     }
 
@@ -222,9 +228,39 @@ public class QuestManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Actualiza el texto UI de la quest
+    /// Actualiza la UI de la quest (visual con sprites)
     /// </summary>
     void UpdateQuestUI()
+    {
+        // Actualizar UI visual con QuestUIManager
+        if (questUIManager != null)
+        {
+            // Si es la primera vez, crear los elementos
+            if (questUIManager.transform.childCount == 0)
+            {
+                questUIManager.CreateQuestUI(questItems, itemDataList);
+            }
+            else
+            {
+                // Si ya existen, solo actualizar contadores
+                questUIManager.UpdateAllQuestItems(questItems);
+            }
+            
+            // Si la quest está completada, mostrar feedback visual
+            if (questCompleted)
+            {
+                questUIManager.ShowQuestComplete();
+            }
+        }
+        
+        // Actualizar texto de status (opcional, backup)
+        UpdateQuestStatusText();
+    }
+    
+    /// <summary>
+    /// Actualiza el texto de status (fallback si no hay UI visual)
+    /// </summary>
+    void UpdateQuestStatusText()
     {
         if (questStatusText == null)
             return;
