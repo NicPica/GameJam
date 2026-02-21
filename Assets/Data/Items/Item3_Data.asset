@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5d1e40431f0ee4eb1699f539715d77, type: 3}
   m_Name: Item3_Data
   m_EditorClassIdentifier: 
-  itemName: Artefacto Antiguo
-  itemType: Generic
-  icon: {fileID: 21300000, guid: f33e1f1d9df5ea441bd8677f97f11e5f, type: 3}
+  itemName: Talisman
+  itemType: Talisman
+  icon: {fileID: -149602346, guid: 792f039eb285bdb4ca485b95ef3abd98, type: 3}
   canBeInQuota: 1
   spawnWeight: 50
   minQuotaAmount: 1

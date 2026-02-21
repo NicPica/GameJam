@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 8732905288053915954}
   - component: {fileID: 2947241171338356131}
   - component: {fileID: 1755113230344451079}
+  - component: {fileID: 6310041956613152471}
   m_Layer: 3
   m_Name: Talisman
   m_TagString: Untagged
@@ -227,7 +228,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -258,3 +259,24 @@ MonoBehaviour:
   floatSpeed: 2
   pickupSound: {fileID: 8300000, guid: aef4d1ab9670733438697c72e64202db, type: 3}
   pickupParticles: {fileID: 7569444160596656843, guid: 05a48dd45ab909c43af68f150fdfd137, type: 3}
+--- !u!135 &6310041956613152471
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651576699400930863}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.0027043172
+  m_Center: {x: -0.0005066157, y: 0.00004239776, z: 0.00058809656}
