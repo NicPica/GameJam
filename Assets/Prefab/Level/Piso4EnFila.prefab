@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7949884573399954402}
   - component: {fileID: 1020066370928008510}
   - component: {fileID: 5013577921924114045}
+  - component: {fileID: 1955609774047015911}
   m_Layer: 0
   m_Name: PisoU (1)
   m_TagString: Untagged
@@ -86,6 +87,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1955609774047015911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721911837000028206}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0019851825, y: 0.001985182, z: 0.000093055416}
+  m_Center: {x: 0, y: -0.0009305541, z: 0.000046527395}
 --- !u!1 &4285862202468524220
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +119,7 @@ GameObject:
   - component: {fileID: 1146936425096177416}
   - component: {fileID: 9026709594861810329}
   - component: {fileID: 6200702304882234378}
+  - component: {fileID: 8091624975138171767}
   m_Layer: 0
   m_Name: PisoU
   m_TagString: Untagged
@@ -113,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 4285862202468524220}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.000083, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -172,6 +195,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8091624975138171767
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285862202468524220}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0019851825, y: 0.001985182, z: 0.000093055416}
+  m_Center: {x: 0, y: -0.0009305541, z: 0.000046527395}
 --- !u!1 &5695250932902590524
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +262,7 @@ GameObject:
   - component: {fileID: 5988618016894761099}
   - component: {fileID: 1265785583553226733}
   - component: {fileID: 2906222565138489319}
+  - component: {fileID: 7495140288200837509}
   m_Layer: 0
   m_Name: PisoU (2)
   m_TagString: Untagged
@@ -293,6 +338,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7495140288200837509
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694235121167859823}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0019851825, y: 0.001985182, z: 0.000093055416}
+  m_Center: {x: 0, y: -0.0009305541, z: 0.000046527395}
 --- !u!1 &7458297707339898477
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +370,7 @@ GameObject:
   - component: {fileID: 5481312589696521280}
   - component: {fileID: 4414095818877717681}
   - component: {fileID: 7505696266781872493}
+  - component: {fileID: 1040549924849514302}
   m_Layer: 0
   m_Name: PisoU (3)
   m_TagString: Untagged
@@ -379,3 +446,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1040549924849514302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7458297707339898477}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0019851825, y: 0.001985182, z: 0.000093055416}
+  m_Center: {x: 0, y: -0.0009305541, z: 0.000046527395}

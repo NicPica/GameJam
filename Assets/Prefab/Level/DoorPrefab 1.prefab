@@ -222,7 +222,7 @@ MonoBehaviour:
   lockedSound: {fileID: 8300000, guid: 0a3368566997a23489ee9bb07c0d1841, type: 3}
   unlockSound: {fileID: 8300000, guid: c34caa0282953144a9e4572afffd694d, type: 3}
   enableCameraShake: 1
-  shakeDuration: 11
+  shakeDuration: 10
   shakeMagnitude: 0.05
   unlockedPrompt: Press "E" To Open
   lockedPrompt: Locked
