@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Gestor principal del juego que controla el flujo entre Hub y Niveles
-/// Versión actualizada con sistema de transiciones y lore
+/// VERSIÓN ACTUALIZADA: Con créditos finales
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -135,10 +135,10 @@ public class GameManager : MonoBehaviour
         levelCompleted = true;
         DebugLog($"Nivel {currentLevel} completado!");
 
-        // Si es el último nivel, terminar el juego
+        // Si es el último nivel, terminar el juego (MOSTRAR CRÉDITOS)
         if (currentLevel >= levelSceneNames.Length)
         {
-            DebugLog("¡Juego completado!");
+            DebugLog("¡Juego completado! Mostrando créditos...");
             EndGame();
         }
         else
@@ -172,12 +172,22 @@ public class GameManager : MonoBehaviour
     #region Game End
 
     /// <summary>
-    /// Termina el juego (mostrar pantalla de victoria)
+    /// Termina el juego (mostrar créditos)
     /// </summary>
     void EndGame()
     {
         DebugLog("=== JUEGO TERMINADO ===");
-        StartCoroutine(EndGameSequence());
+        
+        // Mostrar créditos
+        if (CreditsScreen.Instance != null)
+        {
+            CreditsScreen.Instance.ShowCredits();
+        }
+        else
+        {
+            Debug.LogWarning("CreditsScreen no encontrado - usando secuencia por defecto");
+            StartCoroutine(EndGameSequence());
+        }
     }
 
     IEnumerator EndGameSequence()
