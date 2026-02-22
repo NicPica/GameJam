@@ -3419,10 +3419,12 @@ MonoBehaviour:
   sfxSource: {fileID: 0}
   musicSource: {fileID: 0}
   voiceSource: {fileID: 0}
+  ambientSource: {fileID: 0}
   defaultMasterVolume: 0.8
   defaultSFXVolume: 1
   defaultMusicVolume: 0.7
   defaultVoiceVolume: 0
+  defaultAmbientVolume: 0.5
 --- !u!1 &1373596444
 GameObject:
   m_ObjectHideFlags: 0
@@ -4875,6 +4877,7 @@ MonoBehaviour:
   - Level1
   - Level2
   - Level3
+  - LevelFinal
   levelLoreData:
   - {fileID: 11400000, guid: f173659bec7198e4d93f64665e03411f, type: 2}
   - {fileID: 11400000, guid: 57efa74c6211c834fb235bd44083b704, type: 2}
@@ -4944,34 +4947,28 @@ MonoBehaviour:
   levelQuests:
   - questName: Primera Recoleccion
     requiredItems:
-    - itemName: "Mineral Extra\xF1o"
+    - itemName: Bracelet
       amount: 3
-    - itemName: Cristal Brillante
+    - itemName: Amulet
       amount: 2
-    - itemName: Artefacto Antiguo
+    - itemName: Talisman
       amount: 1
   - questName: "Segunda Recolecci\xF3n"
     requiredItems:
-    - itemName: "Mineral Extra\xF1o"
+    - itemName: Bracelet
       amount: 5
-    - itemName: Cristal Brillante
+    - itemName: Amulet
       amount: 3
-    - itemName: Gema Rara
+    - itemName: Talisman
       amount: 2
-    - itemName: Reliquia
-      amount: 1
   - questName: "Recolecci\xF3n Final"
     requiredItems:
-    - itemName: "Mineral Extra\xF1o"
+    - itemName: Bracelet
       amount: 8
-    - itemName: Cristal Brillante
+    - itemName: Amulet
       amount: 5
-    - itemName: Gema Rara
+    - itemName: Talisman
       amount: 3
-    - itemName: Reliquia
-      amount: 2
-    - itemName: Tesoro Legendario
-      amount: 1
   questDisplayPanel: {fileID: 0}
   questTitleText: {fileID: 0}
   questListText: {fileID: 0}
