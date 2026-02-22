@@ -75,7 +75,7 @@ MonoBehaviour:
   interactionPrompt: Press "E" To Pickup
   destroyOnPickup: 1
   enableHoverEffect: 1
-  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.54901963}
   rotationSpeed: 50
   enableFloating: 1
   floatAmplitude: 0.2
