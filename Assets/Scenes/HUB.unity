@@ -1587,8 +1587,12 @@ PrefabInstance:
       value: -540
       objectReference: {fileID: 0}
     - target: {fileID: 8868040258820049338, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: helpText
+      value: 
+      objectReference: {fileID: 1207659746}
+    - target: {fileID: 8868040258820049338, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8868040258820049338, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: defaultDisplayTime
@@ -4937,6 +4941,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f173659bec7198e4d93f64665e03411f, type: 2}
   - {fileID: 11400000, guid: 57efa74c6211c834fb235bd44083b704, type: 2}
   - {fileID: 11400000, guid: 10b6186f50c8c98449bc611c2dd68317, type: 2}
+  - {fileID: 11400000, guid: 24b93ee9452a9c3469f568a33f13526d, type: 2}
   hubLoreData: {fileID: 0}
   currentLevel: 0
   debugMode: 1

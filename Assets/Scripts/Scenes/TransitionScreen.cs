@@ -74,6 +74,9 @@ public class TransitionScreen : MonoBehaviour
         
         // Empezar invisible
         Hide();
+        
+        // Resetear estado al cargar nueva escena
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
     
     void Update()
@@ -387,5 +390,16 @@ public class TransitionScreen : MonoBehaviour
     {
         // Asegurar que el juego no quede pausado
         Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    
+    /// <summary>
+    /// Resetea el estado de transición al cargar una nueva escena.
+    /// Necesario porque TransitionScreen persiste entre escenas (DontDestroyOnLoad)
+    /// y isTransitioning puede quedar en true si la escena se cargó correctamente.
+    /// </summary>
+    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        isTransitioning = false;
     }
 }
