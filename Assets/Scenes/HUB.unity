@@ -1461,8 +1461,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2070744464368245835, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070744464368245835, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -300
+      value: -210
       objectReference: {fileID: 0}
     - target: {fileID: 2619242188264774109, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_IsActive
@@ -1489,6 +1493,10 @@ PrefabInstance:
     - target: {fileID: 6623294763368249165, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_Name
       value: TransitionScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844007811190361922, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_Pivot.x
@@ -1576,7 +1584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8791810504265889999, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -640
+      value: -540
       objectReference: {fileID: 0}
     - target: {fileID: 8868040258820049338, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_Enabled

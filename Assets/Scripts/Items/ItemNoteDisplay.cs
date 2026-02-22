@@ -81,6 +81,12 @@ public class ItemNoteDisplay : MonoBehaviour
             return;
         }
         
+        // FIX: Activar el canvas ANTES de StartCoroutine
+        // Unity no puede iniciar coroutines en GameObjects inactivos
+        noteCanvas.gameObject.SetActive(true);
+        canvasGroup.alpha = 0f;
+        canvasGroup.blocksRaycasts = false;
+
         StartCoroutine(ShowNoteSequence(noteSprite, onClosed));
     }
     
@@ -109,9 +115,9 @@ public class ItemNoteDisplay : MonoBehaviour
             noteImage.gameObject.SetActive(true);
         }
         
-        // Mostrar canvas
-        Show();
-        
+        // Configurar raycasts (canvas ya activo desde ShowNote)
+        canvasGroup.blocksRaycasts = true;
+
         // Sonido
         if (noteOpenSound != null && AudioManager.Instance != null)
         {
