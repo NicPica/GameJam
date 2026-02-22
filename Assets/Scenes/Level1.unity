@@ -244,6 +244,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2947241171338356131, guid: 9147d812098f46a49b886066a47a45e5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310041956613152471, guid: 9147d812098f46a49b886066a47a45e5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7651576699400930863, guid: 9147d812098f46a49b886066a47a45e5, type: 3}
       propertyPath: m_Name
       value: Artefacto Antiguo
@@ -13519,6 +13527,10 @@ PrefabInstance:
       propertyPath: itemName
       value: Key2
       objectReference: {fileID: 0}
+    - target: {fileID: 9153571980507580664, guid: 2b820346ddbe6d1499f7d4742c5e3af1, type: 3}
+      propertyPath: m_Radius
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17078,6 +17090,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cristal Brillante (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7657043590390385066, guid: 37d05c4b1aed73f4cbfdfe906776bca2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657043590390385066, guid: 37d05c4b1aed73f4cbfdfe906776bca2, type: 3}
+      propertyPath: m_Center.x
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 8414746746951141798, guid: 37d05c4b1aed73f4cbfdfe906776bca2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.42857
@@ -17799,6 +17819,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cristal Brillante
       objectReference: {fileID: 0}
+    - target: {fileID: 7657043590390385066, guid: 37d05c4b1aed73f4cbfdfe906776bca2, type: 3}
+      propertyPath: m_Center.x
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 8414746746951141798, guid: 37d05c4b1aed73f4cbfdfe906776bca2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.447117
@@ -18383,13 +18407,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questItems:
-  - itemName: "Mineral Extra\xF1o"
+  - itemName: Brazalete
     requiredAmount: 3
     currentAmount: 0
-  - itemName: Cristal Brillante
+  - itemName: Amuleto
     requiredAmount: 2
     currentAmount: 0
-  - itemName: Artefacto Antiguo
+  - itemName: Talisman
     requiredAmount: 1
     currentAmount: 0
   itemDataList:
@@ -45587,6 +45611,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door1
       objectReference: {fileID: 0}
+    - target: {fileID: 7748523548499388152, guid: e73008e53b6c8a442a36b1d8c639e45b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -54389,6 +54417,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8743857855565045588, guid: edb0fe9d1c301de46987207cb9dabf00, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800528702428662223, guid: edb0fe9d1c301de46987207cb9dabf00, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -54931,6 +54967,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7804789134054509783, guid: edb0fe9d1c301de46987207cb9dabf00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743857855565045588, guid: edb0fe9d1c301de46987207cb9dabf00, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -72182,7 +72222,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1591640526}
     m_Modifications:
     - target: {fileID: 890919096691019407, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_Name
@@ -72190,43 +72230,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalScale.x
-      value: 29
+      value: 0.9666664
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalScale.y
-      value: 29
+      value: 0.9666666
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalScale.z
-      value: 29
+      value: 0.9666663
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.016
+      value: 0.6098334
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.898
+      value: -0.015300005
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.613
+      value: 0.0936
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5
+      value: -0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5
+      value: -0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -72245,6 +72285,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
+--- !u!4 &1455849320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6299145347992091782, guid: e8c06859a921f914c87ec73c0206d597, type: 3}
+  m_PrefabInstance: {fileID: 1455849319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1457878884
 GameObject:
   m_ObjectHideFlags: 0
@@ -79841,6 +79886,7 @@ Transform:
   - {fileID: 932828843}
   - {fileID: 769150329}
   - {fileID: 1529892890}
+  - {fileID: 1455849320}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1593625033
@@ -104744,6 +104790,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door3
       objectReference: {fileID: 0}
+    - target: {fileID: 7748523548499388152, guid: e73008e53b6c8a442a36b1d8c639e45b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -104812,6 +104862,10 @@ PrefabInstance:
     - target: {fileID: 7542010015892410659, guid: 2b820346ddbe6d1499f7d4742c5e3af1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -26.907
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153571980507580664, guid: 2b820346ddbe6d1499f7d4742c5e3af1, type: 3}
+      propertyPath: m_Radius
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -104901,4 +104955,3 @@ SceneRoots:
   - {fileID: 1109324592}
   - {fileID: 1591640526}
   - {fileID: 1161428354}
-  - {fileID: 1455849319}
