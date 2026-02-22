@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Collections;
 
 /// <summary>
 /// Gestor centralizado de audio del juego
 /// Controla volúmenes, reproduce sonidos y gestiona la música
+/// VERSIÓN ACTUALIZADA: Incluye soporte para sonidos ambiente
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
@@ -20,6 +22,9 @@ public class AudioManager : MonoBehaviour
 
     [Tooltip("Audio Source para voces/diálogos")]
     public AudioSource voiceSource;
+    
+    [Tooltip("Audio Source para sonidos ambiente (loops constantes)")]
+    public AudioSource ambientSource;
 
     [Header("Default Volumes")]
     [Range(0f, 1f)]
@@ -33,12 +38,16 @@ public class AudioManager : MonoBehaviour
 
     [Range(0f, 1f)]
     public float defaultVoiceVolume = 1f;
+    
+    [Range(0f, 1f)]
+    public float defaultAmbientVolume = 0.5f;
 
     // Nombres de los parámetros expuestos en el Audio Mixer
     private const string MASTER_VOLUME = "MasterVolume";
     private const string SFX_VOLUME = "SFXVolume";
     private const string MUSIC_VOLUME = "MusicVolume";
     private const string VOICE_VOLUME = "VoiceVolume";
+    private const string AMBIENT_VOLUME = "AmbientVolume";
 
     // Singleton
     public static AudioManager Instance { get; private set; }
@@ -94,6 +103,17 @@ public class AudioManager : MonoBehaviour
             voiceSource = voiceObj.AddComponent<AudioSource>();
             voiceSource.playOnAwake = false;
         }
+        
+        // Ambient Source
+        if (ambientSource == null)
+        {
+            GameObject ambientObj = new GameObject("Ambient_Source");
+            ambientObj.transform.SetParent(transform);
+            ambientSource = ambientObj.AddComponent<AudioSource>();
+            ambientSource.playOnAwake = false;
+            ambientSource.loop = true;
+            ambientSource.spatialBlend = 0f; // 2D sound
+        }
 
         // Asignar outputs al mixer
         if (audioMixer != null)
@@ -109,6 +129,10 @@ public class AudioManager : MonoBehaviour
             groups = audioMixer.FindMatchingGroups("Voice");
             if (groups.Length > 0)
                 voiceSource.outputAudioMixerGroup = groups[0];
+                
+            groups = audioMixer.FindMatchingGroups("Ambient");
+            if (groups.Length > 0)
+                ambientSource.outputAudioMixerGroup = groups[0];
         }
     }
 
@@ -157,6 +181,17 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat(VOICE_VOLUME, dbVolume);
         PlayerPrefs.SetFloat("VoiceVolume", volume);
     }
+    
+    /// <summary>
+    /// Establece el volumen de ambiente (0-1)
+    /// </summary>
+    public void SetAmbientVolume(float volume)
+    {
+        volume = Mathf.Clamp01(volume);
+        float dbVolume = ConvertToDecibels(volume);
+        audioMixer.SetFloat(AMBIENT_VOLUME, dbVolume);
+        PlayerPrefs.SetFloat("AmbientVolume", volume);
+    }
 
     /// <summary>
     /// Convierte volumen lineal (0-1) a decibelios (-80 a 0)
@@ -178,11 +213,13 @@ public class AudioManager : MonoBehaviour
         float sfxVol = PlayerPrefs.GetFloat("SFXVolume", defaultSFXVolume);
         float musicVol = PlayerPrefs.GetFloat("MusicVolume", defaultMusicVolume);
         float voiceVol = PlayerPrefs.GetFloat("VoiceVolume", defaultVoiceVolume);
+        float ambientVol = PlayerPrefs.GetFloat("AmbientVolume", defaultAmbientVolume);
 
         SetMasterVolume(masterVol);
         SetSFXVolume(sfxVol);
         SetMusicVolume(musicVol);
         SetVoiceVolume(voiceVol);
+        SetAmbientVolume(ambientVol);
     }
 
     #endregion
@@ -190,21 +227,15 @@ public class AudioManager : MonoBehaviour
     #region Play Sounds
 
     /// <summary>
-    /// Reproduce un efecto de sonido
-    /// </summary>
-    /// <summary>
-    /// Reproduce un SFX con variación aleatoria de pitch para evitar repetitividad.
+    /// Reproduce un efecto de sonido con variación aleatoria de pitch
     /// </summary>
     public void PlaySFX(AudioClip clip, float volumeScale = 1f, float minPitch = 0.9f, float maxPitch = 1.1f)
     {
         if (clip == null) return;
 
-        // Aplicamos el pitch aleatorio al source antes de disparar el sonido
         sfxSource.pitch = Random.Range(minPitch, maxPitch);
         sfxSource.PlayOneShot(clip, volumeScale);
-
-        // Opcional: Resetear el pitch a 1 para que otros sonidos no se vean afectados
-        sfxSource.pitch = 1f; 
+        sfxSource.pitch = 1f;
     }
 
     /// <summary>
@@ -269,6 +300,68 @@ public class AudioManager : MonoBehaviour
     {
         voiceSource.Stop();
     }
+    
+    /// <summary>
+    /// Reproduce un sonido ambiente en loop constante
+    /// </summary>
+    public void PlayAmbient(AudioClip clip, float volumeScale = 1f)
+    {
+        if (clip == null)
+        {
+            Debug.LogWarning("AudioManager: Intentando reproducir ambiente nulo");
+            return;
+        }
+        
+        if (ambientSource.clip == clip && ambientSource.isPlaying)
+            return;
+        
+        ambientSource.clip = clip;
+        ambientSource.volume = volumeScale;
+        ambientSource.loop = true;
+        ambientSource.Play();
+        
+        Debug.Log($"AudioManager: Reproduciendo ambiente: {clip.name}");
+    }
+    
+    /// <summary>
+    /// Detiene el sonido ambiente
+    /// </summary>
+    public void StopAmbient()
+    {
+        if (ambientSource.isPlaying)
+        {
+            ambientSource.Stop();
+            Debug.Log("AudioManager: Sonido ambiente detenido");
+        }
+    }
+    
+    /// <summary>
+    /// Cambia suavemente el volumen del ambiente (fade)
+    /// </summary>
+    public void FadeAmbient(float targetVolume, float duration)
+    {
+        StartCoroutine(FadeAmbientCoroutine(targetVolume, duration));
+    }
+    
+    IEnumerator FadeAmbientCoroutine(float targetVolume, float duration)
+    {
+        float startVolume = ambientSource.volume;
+        float elapsed = 0f;
+        
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            ambientSource.volume = Mathf.Lerp(startVolume, targetVolume, elapsed / duration);
+            yield return null;
+        }
+        
+        ambientSource.volume = targetVolume;
+        
+        if (targetVolume <= 0f)
+        {
+            StopAmbient();
+        }
+    }
 
     #endregion
 
@@ -304,6 +397,14 @@ public class AudioManager : MonoBehaviour
     public float GetVoiceVolume()
     {
         return PlayerPrefs.GetFloat("VoiceVolume", defaultVoiceVolume);
+    }
+    
+    /// <summary>
+    /// Obtiene el volumen de ambiente actual (0-1)
+    /// </summary>
+    public float GetAmbientVolume()
+    {
+        return PlayerPrefs.GetFloat("AmbientVolume", defaultAmbientVolume);
     }
 
     #endregion
