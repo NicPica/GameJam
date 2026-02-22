@@ -1460,9 +1460,43 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2070744464368245835, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070744464368245835, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -210
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619242188264774109, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4512022997918669059, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_Text
+      value: 'Nivel1
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5484689385913020812, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: helpText
+      value: 
+      objectReference: {fileID: 1207659746}
+    - target: {fileID: 5484689385913020812, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: closeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c09db99bce7d3647b5ac305fc5feeae, type: 3}
+    - target: {fileID: 5484689385913020812, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: helpMessage
+      value: Press "E" or "Space" To Continue
+      objectReference: {fileID: 0}
     - target: {fileID: 6623294763368249165, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_Name
       value: TransitionScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844007811190361922, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_Pivot.x
@@ -1542,6 +1576,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7165009831267237637, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475483024517889246, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 425
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791810504265889999, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -540
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868040258820049338, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8868040258820049338, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
@@ -2821,6 +2867,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109359520}
   m_CullTransparentMesh: 1
+--- !u!114 &1207659746 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2973061592591400099, guid: d410b51c0f655b0438d875e7c39f198c, type: 3}
+  m_PrefabInstance: {fileID: 593824515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1208108223
 GameObject:
   m_ObjectHideFlags: 0
@@ -3608,7 +3665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 0, y: -208}
   m_SizeDelta: {x: 800, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1415752797
@@ -3633,20 +3690,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7cab23f9d73feae468df7ef8a63c23a5, type: 3}
-    m_FontSize: 80
+    m_FontSize: 120
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 6
-    m_MaxSize: 80
+    m_MinSize: 1
+    m_MaxSize: 120
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'GAME TITLE
-
-'
+  m_Text: VIA AVARORUM
 --- !u!222 &1415752798
 CanvasRenderer:
   m_ObjectHideFlags: 0
