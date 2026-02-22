@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1020066370928008510}
   - component: {fileID: 5013577921924114045}
   - component: {fileID: 1955609774047015911}
+  - component: {fileID: 4901475235169862612}
   - component: {fileID: 7133891338012067826}
   - component: {fileID: 6569882191346516475}
   m_Layer: 0
@@ -110,6 +111,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0019851825, y: 0.001985182, z: 0.000093055416}
   m_Center: {x: 0, y: -0.0009305541, z: 0.000046527395}
+--- !u!114 &4901475235169862612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721911837000028206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c02546e8ec4b624fbc79c203fbf8eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breakDelay: 1
+  destroyOnBreak: 1
+  respawn: 1
+  respawnDelay: 5
+  shakeBeforeBreak: 1
+  shakeIntensity: 0.05
+  shakeSpeed: 20
+  changeColorOnStep: 1
+  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  stepSound: {fileID: 0}
+  breakSound: {fileID: 0}
+  breakParticles: {fileID: 7569444160596656843, guid: abe0cc9a05dde334fb5419548bac5021, type: 3}
+  enableCameraShake: 0
+  cameraShakeMagnitude: 0.1
 --- !u!114 &7133891338012067826
 MonoBehaviour:
   m_ObjectHideFlags: 0
