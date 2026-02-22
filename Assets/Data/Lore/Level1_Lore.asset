@@ -12,10 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7472d3bd915a17c4f93ec0fd418269fd, type: 3}
   m_Name: Level1_Lore
   m_EditorClassIdentifier: 
-  title: MAZMORRA TEMPORAL
-  loreText: Recolecta fragmentos de tu memoria
-  displayDuration: 3
+  title: The Weight of Want
+  loreText: 'You carried more than the others.
+
+    You deserved more than the others.
+
+    The
+    dark simply chose the slowest.
+
+    
+
+    No one said you had to wait.
+
+    No
+    one said you had to turn back.
+
+    Silence is not the same as accusation.
+
+    
+
+    Three
+    objects remain.
+
+    They were lighter once.
+
+    The entrance is the exit.'
+  displayDuration: 6
   fadeSpeed: 1.5
   textColor: {r: 1, g: 1, b: 1, a: 1}
-  titleFontSize: 40
-  loreFontSize: 20
+  titleFontSize: 60
+  loreFontSize: 40

@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7472d3bd915a17c4f93ec0fd418269fd, type: 3}
   m_Name: Level3_Lore
   m_EditorClassIdentifier: 
-  title: NIVEL3TITULO
-  loreText: BLABLABLABLABLA X2
+  title: The Door You Closed
+  loreText: "It wasn\u2019t that monster that closed the path.\r\nIt was the door.\r\nIt
+    was your hand.\r\n\r\nThe amulet was warm when you took it.\r\nThe bracelet tightened
+    when you ran.\r\nThe talisman opened inward.\r\n\r\nYou are not searching for
+    treasure.\r\nYou are searching for the moment before it happened.\r\nThe entrance
+    is the exit."
   displayDuration: 3
   fadeSpeed: 1.5
   textColor: {r: 1, g: 1, b: 1, a: 1}
-  titleFontSize: 40
-  loreFontSize: 20
+  titleFontSize: 60
+  loreFontSize: 40

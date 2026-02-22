@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7472d3bd915a17c4f93ec0fd418269fd, type: 3}
   m_Name: Level2_Lore
   m_EditorClassIdentifier: 
-  title: NIVEL2TITULO
-  loreText: BLABLABLABLABLA
+  title: "Echoes That Didn\u2019t Follow"
+  loreText: "We heard you counting.\r\nNot breaths. Not footsteps.\r\nGold.\r\n\r\nYou
+    said you\u2019d return with a rope.\r\nYou returned with nothing.\r\nSomething
+    else did.\r\n\r\nThe walls remember what you dropped.\r\nThree fragments still
+    hum.\r\nThe entrance is the exit. \r\n"
   displayDuration: 3
   fadeSpeed: 1.5
   textColor: {r: 1, g: 1, b: 1, a: 1}
-  titleFontSize: 40
-  loreFontSize: 20
+  titleFontSize: 60
+  loreFontSize: 40

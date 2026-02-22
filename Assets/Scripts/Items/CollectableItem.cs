@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 /// Clase base para todos los items coleccionables del juego
-/// Implementa IInteractable para ser detectado por el InteractionSystem
+/// VersiÃ³n simplificada para usar con imÃ¡genes de notas personalizadas
 [RequireComponent(typeof(Collider))]
 public class CollectableItem : MonoBehaviour, IInteractable
 {
@@ -13,43 +13,50 @@ public class CollectableItem : MonoBehaviour, IInteractable
     [Tooltip("Tipo de item (mineral, artifact, etc.)")]
     public string itemType = "Generic";
 
-    [Tooltip("Descripción del item")]
+    [Tooltip("DescripciÃ³n del item")]
     [TextArea(2, 4)]
-    public string description = "Un objeto extraño...";
+    public string description = "Un objeto extraÃ±o...";
 
     [Header("Interaction")]
     [Tooltip("Texto que aparece cuando el jugador mira el item")]
     public string interactionPrompt = "Presiona E para recoger";
 
-    [Tooltip("¿Se destruye al ser recogido?")]
+    [Tooltip("Â¿Se destruye al ser recogido?")]
     public bool destroyOnPickup = true;
 
     [Header("Visual Feedback")]
-    [Tooltip("¿Hacer hover effect cuando se mira?")]
+    [Tooltip("Â¿Hacer hover effect cuando se mira?")]
     public bool enableHoverEffect = true;
 
     [Tooltip("Color del highlight al mirar")]
     public Color hoverColor = Color.yellow;
 
-    [Tooltip("Velocidad de rotación constante (Y axis)")]
+    [Tooltip("Velocidad de rotaciÃ³n constante (Y axis)")]
     public float rotationSpeed = 30f;
 
-    [Tooltip("¿Hacer flotar arriba y abajo?")]
+    [Tooltip("Â¿Hacer flotar arriba y abajo?")]
     public bool enableFloating = true;
 
-    [Tooltip("Amplitud del movimiento de flotación")]
+    [Tooltip("Amplitud del movimiento de flotaciÃ³n")]
     public float floatAmplitude = 0.2f;
 
-    [Tooltip("Velocidad del movimiento de flotación")]
+    [Tooltip("Velocidad del movimiento de flotaciÃ³n")]
     public float floatSpeed = 2f;
 
     [Header("Audio")]
-    [Tooltip("Sonido específico al recoger este item (opcional)")]
+    [Tooltip("Sonido especÃ­fico al recoger este item (opcional)")]
     public AudioClip pickupSound;
 
     [Header("Effects (Opcional)")]
-    [Tooltip("Partículas al ser recogido")]
+    [Tooltip("PartÃ­culas al ser recogido")]
     public GameObject pickupParticles;
+    
+    [Header("Item Note (Opcional)")]
+    [Tooltip("Nota con imagen personalizada que aparece al recoger")]
+    public ItemNoteImage itemNote;
+    
+    [Tooltip("Â¿Mostrar nota inmediatamente al recoger?")]
+    public bool showNoteOnPickup = true;
 
     // Referencias internas
     private Renderer itemRenderer;
@@ -57,11 +64,10 @@ public class CollectableItem : MonoBehaviour, IInteractable
     private Material hoverMaterial;
     private bool isBeingLookedAt = false;
     private Vector3 startPosition;
-    private AudioSource audioSource;
 
     void Start()
     {
-        // Guardar posición inicial para floating
+        // Guardar posiciÃ³n inicial para floating
         startPosition = transform.position;
 
         // Obtener renderer
@@ -80,25 +86,23 @@ public class CollectableItem : MonoBehaviour, IInteractable
         Collider col = GetComponent<Collider>();
         if (col != null)
         {
-            col.isTrigger = false; // Debe ser sólido para raycast
+            col.isTrigger = false; // Debe ser sÃ³lido para raycast
         }
         else
         {
             Debug.LogWarning($"CollectableItem {itemName} no tiene Collider!");
         }
-
-       
     }
 
     void Update()
     {
-        // Rotación constante
+        // RotaciÃ³n constante
         if (rotationSpeed > 0)
         {
             transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
         }
 
-        // Flotación
+        // FlotaciÃ³n
         if (enableFloating)
         {
             float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
@@ -110,7 +114,7 @@ public class CollectableItem : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        // Intentar añadir al inventario
+        // Intentar aÃ±adir al inventario
         InventorySystem inventory = InventorySystem.Instance;
 
         if (inventory != null)
@@ -124,7 +128,7 @@ public class CollectableItem : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.LogWarning("No se encontró InventorySystem en la escena!");
+            Debug.LogWarning("No se encontrÃ³ InventorySystem en la escena!");
             OnItemCollected(); // Recoger de todas formas
         }
     }
@@ -161,7 +165,7 @@ public class CollectableItem : MonoBehaviour, IInteractable
     /// Llamado cuando el item es exitosamente recolectado
     protected virtual void OnItemCollected()
     {
-        // Reproducir sonido a través del AudioManager
+        // Reproducir sonido a travÃ©s del AudioManager
         if (pickupSound != null && AudioManager.Instance != null)
         {
             AudioManager.Instance.PlaySFX(pickupSound);
@@ -172,44 +176,61 @@ public class CollectableItem : MonoBehaviour, IInteractable
             AudioSource.PlayClipAtPoint(pickupSound, transform.position);
         }
 
-        // Spawear partículas
+        // Spawear partÃ­culas
         if (pickupParticles != null)
         {
             Instantiate(pickupParticles, transform.position, Quaternion.identity);
         }
 
-        // Destruir o desactivar
-        if (destroyOnPickup)
+        // Mostrar nota si tiene una asignada
+        if (itemNote != null && itemNote.noteSprite != null && showNoteOnPickup)
         {
-            // Si hay audio, esperar a que termine antes de destruir
-            if (pickupSound != null && audioSource != null)
+            if (ItemNoteDisplay.Instance != null)
             {
-                // Hacer invisible pero mantener audio
-                if (itemRenderer != null)
-                {
-                    itemRenderer.enabled = false;
-                }
-
-                // Desactivar collider
-                Collider col = GetComponent<Collider>();
-                if (col != null)
-                {
-                    col.enabled = false;
-                }
-
-                Destroy(gameObject, pickupSound.length);
+                ItemNoteDisplay.Instance.ShowNote(itemNote.noteSprite);
             }
             else
             {
-                Destroy(gameObject);
+                Debug.LogWarning("ItemNoteDisplay no encontrado en la escena!");
             }
+        }
+
+        // Destruir o desactivar despuÃ©s de un pequeÃ±o delay
+        StartCoroutine(DestroyAfterNote());
+
+        Debug.Log($"{itemName} ha sido recogido!");
+    }
+
+    /// <summary>
+    /// Espera un frame y destruye el item
+    /// </summary>
+    IEnumerator DestroyAfterNote()
+    {
+        // Hacer invisible inmediatamente
+        if (itemRenderer != null)
+        {
+            itemRenderer.enabled = false;
+        }
+
+        // Desactivar collider
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+        {
+            col.enabled = false;
+        }
+
+        // Esperar un frame
+        yield return null;
+
+        // Destruir o desactivar
+        if (destroyOnPickup)
+        {
+            Destroy(gameObject);
         }
         else
         {
             gameObject.SetActive(false);
         }
-
-        Debug.Log($"{itemName} ha sido recogido!");
     }
 
     /// Dibuja el gizmo en el editor
