@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5d1e40431f0ee4eb1699f539715d77, type: 3}
   m_Name: Item1_Data
   m_EditorClassIdentifier: 
-  itemName: "Mineral Extra\xF1o"
-  itemType: Generic
-  icon: {fileID: 21300000, guid: b23bce8c8269be84f88a5358231a3d8a, type: 3}
+  itemName: Brazalete
+  itemType: Brazalete
+  icon: {fileID: -678907900, guid: 792f039eb285bdb4ca485b95ef3abd98, type: 3}
   canBeInQuota: 1
   spawnWeight: 50
   minQuotaAmount: 1

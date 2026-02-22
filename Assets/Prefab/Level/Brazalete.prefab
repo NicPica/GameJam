@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2287405170339437238}
   - component: {fileID: 8743857855565045588}
   - component: {fileID: 7733709935983129344}
+  - component: {fileID: 8800528702428662223}
   m_Layer: 3
   m_Name: Brazalete
   m_TagString: Untagged
@@ -106,7 +107,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -135,6 +136,27 @@ MonoBehaviour:
   floatSpeed: 2
   pickupSound: {fileID: 8300000, guid: aef4d1ab9670733438697c72e64202db, type: 3}
   pickupParticles: {fileID: 7569444160596656843, guid: d8bc87936a27e4840b6cefb1bbea7032, type: 3}
+--- !u!135 &8800528702428662223
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541327683426156228}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.00772768
+  m_Center: {x: 0.000000060070306, y: -0.00003509354, z: 0.0062723337}
 --- !u!1 &8493676136940765773
 GameObject:
   m_ObjectHideFlags: 0
