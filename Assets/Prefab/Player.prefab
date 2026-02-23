@@ -709,9 +709,9 @@ MonoBehaviour:
   walkSpeed: 3
   maxVelocityChange: 10
   enableSprint: 1
-  unlimitedSprint: 1
+  unlimitedSprint: 0
   sprintKey: 304
-  sprintSpeed: 12.68
+  sprintSpeed: 5
   sprintDuration: 4
   sprintCooldown: 0.5
   sprintFOV: 70
@@ -720,8 +720,8 @@ MonoBehaviour:
   hideBarWhenFull: 1
   sprintBarBG: {fileID: 3402218845459984493}
   sprintBar: {fileID: 5015381291910508022}
-  sprintBarWidthPercent: 0.3
-  sprintBarHeightPercent: 0.02
+  sprintBarWidthPercent: 0.1
+  sprintBarHeightPercent: 0.01
   enableJump: 1
   jumpKey: 32
   jumpPower: 3
