@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Gestor centralizado de audio del juego
 /// Controla volúmenes, reproduce sonidos y gestiona la música
-/// VERSIÓN ACTUALIZADA: Incluye soporte para sonidos ambiente
+/// VERSIÓN ACTUALIZADA: Sonidos 3D conectados al Audio Mixer
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
@@ -48,6 +49,10 @@ public class AudioManager : MonoBehaviour
     private const string MUSIC_VOLUME = "MusicVolume";
     private const string VOICE_VOLUME = "VoiceVolume";
     private const string AMBIENT_VOLUME = "AmbientVolume";
+
+    // Pool de AudioSources temporales para sonidos 3D
+    private List<AudioSource> tempAudioSources = new List<AudioSource>();
+    private AudioMixerGroup sfxMixerGroup;
 
     // Singleton
     public static AudioManager Instance { get; private set; }
@@ -120,7 +125,10 @@ public class AudioManager : MonoBehaviour
         {
             var groups = audioMixer.FindMatchingGroups("SFX");
             if (groups.Length > 0)
+            {
                 sfxSource.outputAudioMixerGroup = groups[0];
+                sfxMixerGroup = groups[0]; // Guardar para sonidos 3D
+            }
 
             groups = audioMixer.FindMatchingGroups("Music");
             if (groups.Length > 0)
@@ -240,6 +248,7 @@ public class AudioManager : MonoBehaviour
 
     /// <summary>
     /// Reproduce un efecto de sonido en una posición 3D
+    /// NUEVA VERSIÓN: Conectado al Audio Mixer
     /// </summary>
     public void PlaySFXAtPoint(AudioClip clip, Vector3 position, float volumeScale = 1f)
     {
@@ -249,7 +258,33 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        AudioSource.PlayClipAtPoint(clip, position, volumeScale);
+        // Crear un GameObject temporal con AudioSource
+        GameObject tempGO = new GameObject("TempAudio_" + clip.name);
+        tempGO.transform.position = position;
+        
+        AudioSource tempSource = tempGO.AddComponent<AudioSource>();
+        tempSource.clip = clip;
+        tempSource.volume = volumeScale;
+        tempSource.spatialBlend = 1f; // 3D sound
+        tempSource.playOnAwake = false;
+        tempSource.loop = false;
+        
+        // CRÍTICO: Conectar al Audio Mixer
+        if (sfxMixerGroup != null)
+        {
+            tempSource.outputAudioMixerGroup = sfxMixerGroup;
+        }
+        
+        // Configuración 3D
+        tempSource.minDistance = 1f;
+        tempSource.maxDistance = 50f;
+        tempSource.rolloffMode = AudioRolloffMode.Linear;
+        
+        // Reproducir
+        tempSource.Play();
+        
+        // Destruir después de que termine
+        Destroy(tempGO, clip.length + 0.1f);
     }
 
     /// <summary>
