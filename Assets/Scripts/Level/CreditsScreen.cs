@@ -232,7 +232,7 @@ Gracias por jugar!";
     {
         if (thanksText != null)
         {
-            thanksText.text = "GRACIAS POR JUGAR";
+            thanksText.text = "THANKS FOR PLAYING!";
             thanksText.gameObject.SetActive(true);
         }
         

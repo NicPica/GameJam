@@ -16,7 +16,7 @@ MonoBehaviour:
   loreText: "We heard you counting.\r\nNot breaths. Not footsteps.\r\nGold.\r\n\r\nYou
     said you\u2019d return with a rope.\r\nYou returned with nothing.\r\nSomething
     else did.\r\n\r\nThe walls remember what you dropped.\r\nThree fragments still
-    hum.\r\nThe entrance is the exit. \r\n"
+    hum.\r\nThe entrance is the exit. "
   displayDuration: 3
   fadeSpeed: 1.5
   textColor: {r: 1, g: 1, b: 1, a: 1}

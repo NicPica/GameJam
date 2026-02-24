@@ -20,38 +20,34 @@ MonoBehaviour:
     There was
     time.
 
-    
 
     The dungeon did not swallow you.
 
-    You stepped inside
-    something smaller.
+    You stepped inside something
+    smaller.
 
     A choice.
 
-    
 
     The amulet.
 
     The bracelet.
 
-    The
-    talisman.
+    The talisman.
 
-    
 
-    You have gathered them before.
+    You
+    have gathered them before.
 
-    
+
+    There is no deeper chamber.
 
     There is no
-    deeper chamber.
-
-    There is no final door.
+    final door.
 
     The entrance is the exit.'
   displayDuration: 3
   fadeSpeed: 1.5
   textColor: {r: 1, g: 1, b: 1, a: 1}
   titleFontSize: 60
-  loreFontSize: 40
+  loreFontSize: 25
